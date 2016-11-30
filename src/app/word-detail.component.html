@@ -1,0 +1,9 @@
+<div *ngIf="word">
+  <div>
+    <label>ru: </label>
+    <input [(ngModel)]="word.ru" placeholder="ru"/>
+    <label>un: </label>
+    <input [(ngModel)]="word.un" placeholder="un"/>
+  </div>
+  <button (click)="save()">Save</button>
+</div>

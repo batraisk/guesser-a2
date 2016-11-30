@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Word } from '../word';
 import { Router }            from '@angular/router';
-
-import { Word } from './word';
-import { WordService } from './word.service'
+import { WordService } from '../word.service';
+import { AppComponent } from '../app.component';
 
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  providers: [WordService]
+  selector: 'db-list',
+  templateUrl: './db-list.component.html'
 })
-export class AppComponent implements OnInit {
+
+export class DBListComponent {
+
+
   title = 'Guesser';
   list: Word[] = [];
   selectedWord: Word;
