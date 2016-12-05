@@ -1,0 +1,16 @@
+<div class="catalogs">
+  <div>
+    <label>Новый каталог слов</label> <input #catalogName />
+    <button (click)="addCatalog(catalogName.value)">
+      Создать
+    </button>
+  </div>
+  <ul class="catalogs">
+    <li (click)="onSelectAll(catalog)" [class.selected]="selectAll">All</li>
+    <li *ngFor="let catalog of catalogs"
+      [class.selected]="(selectedCatalogs.indexOf(catalog) !== -1) && !selectAll"
+      (click)="onSelect(catalog)">
+      <span>{{catalog.name}}</span>
+    </li>
+  </ul>
+</div>

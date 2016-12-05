@@ -1,38 +1,12 @@
 
 <div class="row">
 <div class="col-md-4"></div>
-  <div class="col-md-4">
-    <h1>
-      Guesser
-    </h1>
-  </div>
 </div>
-<button (click)="gotoStart()">Start</button>
-<button (click)="gotoBase()">Base</button>
-<div>
-  <label>Ru</label> <input #wordRu />
-  <label>En</label> <input #wordEn />
-  <button (click)="add(wordRu.value, wordEn.value)">
-    Add
-  </button>
+<div class="row">
+  <button (click)="gotoStart()">Start</button>
+  <button (click)="gotoBase()">Base</button>
 </div>
-<ul class="list">
-  <li *ngFor="let word of list"
-  [class.selected]="word === selectedWord"
-  (click)="onSelect(word)">
-    <div [class.hidden]="word === selectedWord">
-      <span class="badge">{{word.id}}</span>
-      <span>{{word.un}}  </span>
-      <span>{{word.ru}}</span>
-    </div>
-    <my-word-detail
-      [word]="selectedWord"
-      [class.hidden]="word !== selectedWord"
-    ></my-word-detail>
-    <button class="delete"
-      (click)="delete(word); $event.stopPropagation()">x</button>
-  </li>
-</ul>
+
 <router-outlet></router-outlet>
 <!-- <my-word-detail [word]="selectedWord"></my-word-detail> -->
 

@@ -5,11 +5,15 @@ import 'rxjs/add/operator/toPromise';
 
 import { Word } from './word';
 import { LIST } from './mock-words';
+import { ITask } from './models/itask';
+import { ICatalog } from './models/icatalog';
 
 @Injectable()
 export class WordService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private wordsUrl = 'words';  // URL to web api
+  private wordsUrl = 'api/words';  // URL to web api
+  private taskUrl = 'api/get_list';
+  private catalogsUrl = 'api/lists';
 
   constructor(private http: Http) { }
 
@@ -18,10 +22,16 @@ export class WordService {
                .toPromise()
                .then(response => response.json() as Word[])
                .catch(this.handleError);
-
    // return Promise.resolve(LIST);
 
 
+  }
+
+  getTask(): Promise<ITask> {
+    return this.http.get(this.taskUrl)
+               .toPromise()
+               .then(response => response.json() as ITask)
+               .catch(this.handleError);
   }
   // See the "Take it slow" appendix
   getWordsSlowly(): Promise<Word[]> {
@@ -52,6 +62,21 @@ export class WordService {
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then(() => null)
+      .catch(this.handleError);
+  }
+
+  getCatalogs(): Promise<ICatalog[]> {
+    return this.http.get(this.catalogsUrl)
+               .toPromise()
+               .then(response => response.json() as ICatalog[])
+               .catch(this.handleError);
+  }
+
+  createCatalog(name:string): Promise<ICatalog> {
+    return this.http
+      .post(this.catalogsUrl, JSON.stringify({name: name}), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json())
       .catch(this.handleError);
   }
 

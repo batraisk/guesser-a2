@@ -1,1 +1,8 @@
 <h1>Game!</h1>
+<br>
+<h2 *ngIf=word>{{ word.un }}</h2>
+<ul class="task">
+  <li *ngFor="let taskWord of list" (click)="setAnswer(taskWord)">
+    <span>{{taskWord.ru}}</span>
+  </li>
+</ul>
