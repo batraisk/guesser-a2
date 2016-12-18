@@ -11,6 +11,7 @@ import { SettingsService } from './services/settings/settings.service';
 import { AppRoutingModule }     from './app-routing.module';
 import { HelloComponent } from './components/hello/hello.component';
 import { Word } from './models/classes/word';
+import { Catalog } from './models/classes/catalog';
 import { ICatalog } from './models/interfaces/icatalog';
 
 

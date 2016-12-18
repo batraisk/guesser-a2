@@ -2,3 +2,14 @@
   catalogs works!
 </p>
 <button (click)="goBack()">Back</button>
+<ul>
+  <li (click)="showAll()">all</li>
+  <li *ngFor="let catalog of catalogs"
+      (click)="setCatalog(catalog)">{{catalog.name}}</li>
+</ul>
+<ul *ngIf="activeCatalog">
+  <li *ngFor="let word of activeCatalog.list">
+    <span>{{ word.un }}</span>
+    <span>{{ word.ru }}</span>
+  </li>
+</ul>
