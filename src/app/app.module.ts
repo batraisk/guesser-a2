@@ -6,8 +6,13 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { CatalogsComponent } from './components/catalogs/catalogs.component';
 import { CatalogsService } from './services/catalogs/catalogs.service';
+import { SettingsService } from './services/settings/settings.service';
+
 import { AppRoutingModule }     from './app-routing.module';
 import { HelloComponent } from './components/hello/hello.component';
+import { Word } from './models/classes/word';
+import { ICatalog } from './models/interfaces/icatalog';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +26,7 @@ import { HelloComponent } from './components/hello/hello.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [CatalogsService],
+  providers: [CatalogsService, SettingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
