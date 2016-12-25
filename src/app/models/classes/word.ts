@@ -1,6 +1,6 @@
 export class Word {
   id: number;
   un: string;
-  en: string;
+  ru: string;
   list_id: number;
 }

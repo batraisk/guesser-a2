@@ -1,15 +1,110 @@
 <p>
   catalogs works!
 </p>
-<button (click)="goBack()">Back</button>
+<button (click)="goBack($event)">Back</button>
 <ul>
-  <li (click)="showAll()">all</li>
+  <li (click)="showAll($event)"
+      [class.selected]="activeCatalog && (activeCatalog.id == -1)"
+      class="catalog-name"
+      >all</li>
   <li *ngFor="let catalog of catalogs"
-      (click)="setCatalog(catalog)">{{catalog.name}}</li>
+      [class.selected]="activeCatalog && (catalog.id == activeCatalog.id)"
+      (click)="setCatalog(catalog, $event)"
+      class="catalog-name"
+      >{{catalog.name}}
+      <a href="javascript: void(0)" (click)="deleteCatalog(catalog)">delete</a>
+      <label class="btn"
+             for="modal-1"
+             (click)="catalogEditForm(catalog)">Edit
+      </label>
+  </li>
 </ul>
+<input type="text" #name>
+<a href="javascript: void(0)" (click)="addCatalog(name.value); name.value=''">add</a>
 <ul *ngIf="activeCatalog">
+
+<div class="create-word-group"
+     *ngIf="activeCatalog && (activeCatalog.id !== -1)">
+  <input type="text" #wordEn>
+  <input type="text" #wordRu>
+  <a href="javascript: void(0)"
+     (click)="addWord(wordEn.value,wordRu.value,activeCatalog.id);
+     wordEn.value='';
+     wordRu.value=''"
+     >addWord</a>
+</div>
+
   <li *ngFor="let word of activeCatalog.list">
     <span>{{ word.un }}</span>
     <span>{{ word.ru }}</span>
+
+    <label class="btn"
+           for="modal-1"
+           (click)="wordEditForm(word)">Edit
+    </label>
+
+    <a href="javascript: void(0)"
+       (click)="deleteWord(word);"
+       *ngIf="activeCatalog && (activeCatalog.id !== -1)">DeleteWord</a>
   </li>
 </ul>
+
+
+
+<!-- Модальное окно -->
+<div class="modal">
+  <input class="modal-open" id="modal-1" type="checkbox" hidden>
+  <div class="modal-wrap" aria-hidden="true" role="dialog">
+    <label class="modal-overlay" for="modal-1"></label>
+    <!-- for catalog -->
+    <div class="modal-dialog" *ngIf="editCatalog">
+      <div class="modal-header">
+        <h2>Редактирование каталога </h2>
+        <label class="btn-close" for="modal-1" aria-hidden="true">×</label>
+      </div>
+      <div class="modal-body"
+           *ngIf="editCatalog">
+        <p>
+          <input type="text"
+                 placeholder="name"
+                 [(ngModel)]="editCatalog.name">
+        </p>
+
+      </div>
+      <div class="modal-footer">
+        <label class="btn btn-primary"
+               for="modal-1"
+               (click)="updateCatalog(enableCatalog, editCatalog)">Сохранить
+        </label>
+      </div>
+    </div>
+     <!-- for word -->
+    <div class="modal-dialog" *ngIf="editWord">
+      <div class="modal-header">
+        <h2>Редактирование слова</h2>
+        <label class="btn-close" for="modal-1" aria-hidden="true">×</label>
+      </div>
+      <div class="modal-body"
+           *ngIf="editWord">
+        <p>
+          <input type="text"
+                 placeholder="en"
+                 [(ngModel)]="editWord.un">
+        </p>
+        <p>
+          <input type="text"
+                 placeholder="en"
+                 [(ngModel)]="editWord.ru">
+        </p>
+      </div>
+      <div class="modal-footer">
+        <label class="btn btn-primary"
+               for="modal-1"
+               (click)="updateWord(editWord)">Сохранить
+        </label>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- Модальное окно(end) -->

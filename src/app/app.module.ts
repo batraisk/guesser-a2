@@ -13,7 +13,7 @@ import { HelloComponent } from './components/hello/hello.component';
 import { Word } from './models/classes/word';
 import { Catalog } from './models/classes/catalog';
 import { ICatalog } from './models/interfaces/icatalog';
-
+import * as _ from "lodash";
 
 @NgModule({
   declarations: [
