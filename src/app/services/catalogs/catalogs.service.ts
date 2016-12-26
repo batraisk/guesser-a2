@@ -10,14 +10,14 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class CatalogsService {
-  public catalogs: ICatalog[] = [];
+  public catalogs: ICatalog[] = null;
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http, private settings: SettingsService ) {
-    // this.http.get(this.settings.catalogsUrl)
-    //     .toPromise()
-    //     .then(response => {this.catalogs = response.json() as ICatalog[]})
-    //     .catch(this.handleError);
+  constructor(private http: Http, private settings: SettingsService) {
+    this.http.get(this.settings.catalogsUrl)
+        .toPromise()
+        .then(response => {this.catalogs = response.json() as ICatalog[]})
+        .catch(this.handleError);
   }
 
   getCatalogs(): ICatalog[] {

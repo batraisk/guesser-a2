@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { CatalogsComponent } from './components/catalogs/catalogs.component';
 import { CatalogsService } from './services/catalogs/catalogs.service';
+import { GameService } from './services/game/game.service';
 import { SettingsService } from './services/settings/settings.service';
 
 import { AppRoutingModule }     from './app-routing.module';
@@ -13,13 +14,16 @@ import { HelloComponent } from './components/hello/hello.component';
 import { Word } from './models/classes/word';
 import { Catalog } from './models/classes/catalog';
 import { ICatalog } from './models/interfaces/icatalog';
+import { ITask } from './models/interfaces/itask';
 import * as _ from "lodash";
+import { GameComponent } from './components/game/game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CatalogsComponent,
-    HelloComponent
+    HelloComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,7 @@ import * as _ from "lodash";
     HttpModule,
     AppRoutingModule
   ],
-  providers: [CatalogsService, SettingsService],
+  providers: [CatalogsService, SettingsService, GameService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/switchMap';
-import { ActivatedRoute, Params }   from '@angular/router';
-import { Location }                 from '@angular/common'
-import { CatalogsService }           from '../../services/catalogs/catalogs.service'
-import { ICatalog } from '../../models/interfaces/icatalog'
+import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+import { CatalogsService } from '../../services/catalogs/catalogs.service';
+import { ICatalog } from '../../models/interfaces/icatalog';
 import { Catalog } from '../../models/classes/catalog';
 import { Word } from '../../models/classes/word';
 import * as _ from "lodash";
@@ -14,7 +14,7 @@ import * as _ from "lodash";
   styleUrls: ['./catalogs.component.scss']
 })
 export class CatalogsComponent implements OnInit {
-private catalogs: ICatalog[] = [];
+private catalogs: ICatalog[] = null;
 private activeCatalog: ICatalog;
 private editEn: Catalog;
 private editRu: Catalog;
@@ -25,12 +25,17 @@ public editWord;
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private catalogService: CatalogsService) {}
+    private catalogService: CatalogsService) {
+  }
 
   ngOnInit() {
-    this.catalogService
-        .downloadCatalogs()
-        .then(catalogs => {this.catalogs = this.catalogService.getCatalogs()})
+    if(!this.catalogs) {
+      // code...
+      this.catalogService
+          .downloadCatalogs()
+          .then(catalogs => {this.catalogs = this.catalogService.getCatalogs()})
+    }
+    // this.catalogs = this.catalogService.catalogs;
     // this.catalogs = this.catalogService.getCatalogs();
   }
 
@@ -54,6 +59,7 @@ public editWord;
 
   deleteCatalog(catalog: Catalog): void {
     this.catalogService.deleteCatalog(catalog);
+    this.addCatalog = null;
   }
 
   addWord(wordEn: string, wordRn: string, catalgId: number): void {
@@ -67,14 +73,7 @@ public editWord;
 
   updateWord(word: Word): void {
     this.catalogService.updateWord(word)
-        .then(response => {
-          // var newWord = response;
-          // var catalog = _.findLast(this.catalogs, { 'id': word.list_id})
-
-          // var indexWord =this.activeCatalog.list.indexOf(word);
-          // this.activeCatalog.list[indexWord] = newWord;
-          // console.log(indexWord);
-        });
+        .then(response => {});
   }
 
   deleteWord(word: Word): void {

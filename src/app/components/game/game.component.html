@@ -1,0 +1,26 @@
+<button (click)="goBack($event)">Back</button>
+<p>
+  game works!
+</p>
+<ul>
+  <li (click)="showAll($event)"
+      [class.selected]="activeCatalog && (activeCatalog.id == -1)"
+      class="catalog-name"
+      >select all</li>
+  <li *ngFor="let catalog of catalogs"
+      [class.selected]="activeCatalogs && (activeCatalogs.indexOf(catalog)!==-1)"
+      (click)="setCatalog(catalog, $event)"
+      class="catalog-name"
+      >{{catalog.name}}
+  </li>
+</ul>
+<div *ngIf="task">
+  <h2>{{ task.word.ru }}</h2>
+  <ul>
+    <li *ngFor="let word of task.list"
+        (click)="setAnswer(word)"
+        class="ques-word">
+      {{ word.un }}
+    </li>
+  </ul>
+</div>
