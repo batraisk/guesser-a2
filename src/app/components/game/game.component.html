@@ -1,7 +1,39 @@
+<!-- <div md-content class="md-padding">
+  <md-tab-group [selectedIndex]="0" md-border-bottom>
+    <md-tab
+            label="select all">
+      <div class="demo-tab tab{{$index%4}}" style="padding: 25px; text-align: center;">
+        <div>select all</div>
+        <br/>
+        <button md-button class="md-primary md-raised" >Remove Tab</button>
+      </div>
+    </md-tab>
+
+    <md-tab
+            label="2">
+      <div class="demo-tab tab{{$index%4}}" style="padding: 25px; text-align: center;">
+        <div>vfvf</div>
+        <br/>
+        <button md-button class="md-primary md-raised" >Remove Tab</button>
+      </div>
+    </md-tab>
+
+  </md-tab-group>
+</div> -->
+
+
+
+
 <button (click)="goBack($event)">Back</button>
+<!-- <md-input-container>
+  <input md-input placeholder="Default color" [value]="number">
+</md-input-container>
+<md-input-container dividerColor="accent">
+  <input md-input placeholder="Accent color" value="">
+</md-input-container>
 <p>
   game works!
-</p>
+</p> -->
 <ul>
   <li (click)="showAll($event)"
       [class.selected]="activeCatalog && (activeCatalog.id == -1)"
@@ -14,13 +46,28 @@
       >{{catalog.name}}
   </li>
 </ul>
+
+<!-- <md-list>
+  <md-list-item (click)="showAll($event)"
+      [class.selected]="activeCatalog && (activeCatalog.id == -1)"
+      class="catalog-name"
+  > select all </md-list-item>
+  <md-list-item *ngFor="let catalog of catalogs"
+      [class.selected]="activeCatalogs && (activeCatalogs.indexOf(catalog)!==-1)"
+      (click)="setCatalog(catalog, $event)"
+      class="catalog-name"
+  > {{catalog.name}}
+  <md-checkbox class="md-secondary"></md-checkbox>
+  </md-list-item>
+</md-list> -->
+
 <div *ngIf="task">
   <h2>{{ task.word.ru }}</h2>
   <ul>
     <li *ngFor="let word of task.list"
         (click)="setAnswer(word)"
         class="ques-word">
-      {{ word.un }}
+      {{ word.un }}  id {{ word.list_id }}
     </li>
   </ul>
 </div>

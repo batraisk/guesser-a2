@@ -16,7 +16,9 @@ import { Catalog } from './models/classes/catalog';
 import { ICatalog } from './models/interfaces/icatalog';
 import { ITask } from './models/interfaces/itask';
 import * as _ from "lodash";
+import 'hammerjs';
 import { GameComponent } from './components/game/game.component';
+import { MaterialModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { GameComponent } from './components/game/game.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    [MaterialModule.forRoot()]
   ],
   providers: [CatalogsService, SettingsService, GameService],
   bootstrap: [AppComponent]

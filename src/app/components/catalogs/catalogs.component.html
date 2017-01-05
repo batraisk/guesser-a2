@@ -1,54 +1,120 @@
-<p>
-  catalogs works!
-</p>
-<a routerLink="/game" routerLinkActive="active">Start</a>
-<button (click)="goBack($event)">Back</button>
-<ul>
-  <li (click)="showAll($event)"
-      [class.selected]="activeCatalog && (activeCatalog.id == -1)"
-      class="catalog-name"
-      >all</li>
-  <li *ngFor="let catalog of catalogs"
-      [class.selected]="activeCatalog && (catalog.id == activeCatalog.id)"
-      (click)="setCatalog(catalog, $event)"
-      class="catalog-name"
-      >{{catalog.name}}
-      <a href="javascript: void(0)" (click)="deleteCatalog(catalog)">delete</a>
-      <label class="btn"
-             for="modal-1"
-             (click)="catalogEditForm(catalog)">Edit
-      </label>
-  </li>
-</ul>
-<input type="text" #name>
-<a href="javascript: void(0)" (click)="addCatalog(name.value); name.value=''">add</a>
-<ul *ngIf="activeCatalog">
+<header>
+  <div class="navigation">
+    <button class="back-btn"
+            md-button
+            (click)="goBack($event)">
+              <md-icon>arrow_back
+              </md-icon>
+            <!-- <i class="material-icons">keyboard_arrow_left</i> -->
+    </button>
+    <button class="start-btn"
+            md-button
+            routerLink="/game"
+            routerLinkActive="active">
+              <md-icon>play_circle_outline
+              </md-icon> <strong> Start</strong>
+    </button>
+  </div>
+  <div class="user-set">
+    <button md-button><md-icon>home</md-icon>
+    </button>
+  </div>
+</header>
 
-<div class="create-word-group"
-     *ngIf="activeCatalog && (activeCatalog.id !== -1)">
-  <input type="text" #wordEn>
-  <input type="text" #wordRu>
-  <a href="javascript: void(0)"
-     (click)="addWord(wordEn.value,wordRu.value,activeCatalog.id);
-     wordEn.value='';
-     wordRu.value=''"
-     >addWord</a>
+
+  <div class ="sidenav">
+    <div class="new-catalog-side">
+      <md-input-container>
+        <input type="text" #nameCatalog
+               md-input placeholder="Новый каталог">
+      </md-input-container>
+
+          <a href="javascript: void(0)"
+             (click)="addCatalog(nameCatalog.value);
+             nameCatalog.value=''">
+             <md-icon>add
+              </md-icon>
+          </a>
+    </div>
+  </div>
+
+<div class="wrapper">
+  <div md-content class="md-padding">
+    <md-tab-group [selectedIndex]="0"
+      class="tab-list"
+      md-border-bottom>
+      <md-tab label="select all">
+        <div class="demo-tab tab{{$index%4}}"
+             style="padding: 25px;
+                    text-align: center;">
+          <!-- <div class="content-list"> -->
+            <ul *ngFor="let catalog of catalogs">
+              <li *ngFor="let word of catalog.list">
+                <span>{{ word.un }}</span>
+                <span>{{ word.ru }}</span>
+                <label class="action-icon"
+                       for="modal-1"
+                       (click)="wordEditForm(word)">
+                         <md-icon>edit
+                         </md-icon>
+                </label>
+                <label class="action-icon"
+                   (click)="deleteWord(word);"
+                   *ngIf="catalog && (catalog.id !== -1)">
+                     <md-icon>delete
+                     </md-icon>
+                </label>
+              </li>
+            </ul>
+          <!-- </div> -->
+          <br/>
+          <button md-button class="md-primary md-raised" >Remove Tab</button>
+        </div>
+      </md-tab>
+
+
+
+      <md-tab *ngFor="let catalog of catalogs"
+              label="{{catalog.name}}">
+          <a href="javascript: void(0)" (click)="deleteCatalog(catalog)">delete</a>
+          <label class="btn"
+                 for="modal-1"
+                 (click)="catalogEditForm(catalog)">Edit
+          </label>
+          <div class="demo-tab tab{{$index%4}}" style="padding: 25px; text-align: center;">
+              <div class="create-word-group"
+                   *ngIf="catalog && (catalog.id !== -1)">
+                <input type="text" #wordEn>
+                <input type="text" #wordRu>
+                <a href="javascript: void(0)"
+                   (click)="addWord(wordEn.value,wordRu.value,catalog.id);
+                   wordEn.value='';
+                   wordRu.value=''"
+                   >addWord</a>
+              </div>
+            <div>
+                <li *ngFor="let word of catalog.list">
+                  <span>{{ word.un }}</span>
+                  <span>{{ word.ru }}</span>
+                  <label class="btn"
+                         for="modal-1"
+                         (click)="wordEditForm(word)">Edit
+                  </label>
+                  <a href="javascript: void(0)"
+                     (click)="deleteWord(word);"
+                     *ngIf="catalog && (catalog.id !== -1)">DeleteWord</a>
+                </li>
+            </div>
+            <br/>
+            <button md-button class="md-primary md-raised" >Remove Tab</button>
+          </div>
+      </md-tab>
+    </md-tab-group>
+  </div>
 </div>
 
-  <li *ngFor="let word of activeCatalog.list">
-    <span>{{ word.un }}</span>
-    <span>{{ word.ru }}</span>
 
-    <label class="btn"
-           for="modal-1"
-           (click)="wordEditForm(word)">Edit
-    </label>
 
-    <a href="javascript: void(0)"
-       (click)="deleteWord(word);"
-       *ngIf="activeCatalog && (activeCatalog.id !== -1)">DeleteWord</a>
-  </li>
-</ul>
 
 
 

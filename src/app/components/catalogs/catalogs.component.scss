@@ -5,6 +5,108 @@
   cursor: pointer;
 }
 
+ul {
+  list-style-type: none;
+}
+
+.tab-list {
+  //margin: 0 20% 0 20%;
+  //position: fixed;
+  //top: 40px;
+  margin-left: 240px;
+  position: relative;
+}
+
+.content-list {
+  // height: 120px;
+  // overflow: overlay;
+}
+
+header {
+  //background: #cecece;
+  background: #0003FF;
+  height: 40px;
+  position: fixed;
+  min-width: 100%;
+  z-index: 3;
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.14),
+              0px 0px 2px 2px rgba(0, 0, 0, 0.098),
+              0px 0px 5px 1px rgba(0, 0, 0, 0.084);
+}
+
+button {
+  color: #fff;
+}
+
+.start-btn {
+  color: #fff;
+  font-size: 24px
+}
+
+.back-btn {
+  min-width: 55px;
+}
+
+.user-set {
+  display: inline-flex;
+  float: right;
+}
+
+.navigation {
+  display: inline-flex;
+  float: left;
+  margin: 0 0 0 5px;
+}
+
+.card-list {
+    // padding: 10 auto;
+    // margin: 10 auto;
+    // background: #cecece;
+    bottom: 0;
+    overflow-y: scroll;
+    height: 50vh;
+}
+
+.action-icon {
+  -webkit-transition-duration: .5s;
+  cursor: pointer;
+
+  transition-duration: .5s;
+  color: #a5a5a5a;
+
+  md-icon {
+    font-size: 18px;
+  }
+
+  &:hover {
+    color: #0703F7;
+  }
+}
+
+.sidenav {
+  //background: #cecece;
+  background: rgba(210, 210, 210, .52);
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  justify-content: center;
+  position: fixed;
+  top: 40px;
+  width: 239px;
+  z-index: 1;
+}
+
+.new-catalog-side {
+  margin-top: 5px;
+}
+
+.wrapper {
+  top: 40px;
+  position: relative;
+}
+
+
+
 /* Стили модального окна */
 .modal-header h2 {
     color: #555;
