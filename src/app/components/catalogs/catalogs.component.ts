@@ -21,6 +21,8 @@ private editRu: Catalog;
 private editCatalog: Catalog; // выбранный каталог
 private enableCatalog: Catalog; // каталог который выбрали для редактирования
 public editWord;
+private loading: Boolean;
+public selectIndex: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,12 +33,18 @@ public editWord;
   ngOnInit() {
     if(!this.catalogs) {
       // code...
+      this.loading = true;
       this.catalogService
           .downloadCatalogs()
-          .then(catalogs => {this.catalogs = this.catalogService.getCatalogs()})
+          .then(catalogs => {this.catalogs = this.catalogService.getCatalogs();
+                             this.loading = false})
     }
     // this.catalogs = this.catalogService.catalogs;
     // this.catalogs = this.catalogService.getCatalogs();
+  }
+
+  show(event){
+    console.log(event);
   }
 
   setCatalog(catalog: ICatalog, event = null): void {
@@ -45,6 +53,7 @@ public editWord;
       clone[key] = catalog[key];
     }
     this.activeCatalog = clone;
+    this.selectIndex = this.catalogs.indexOf(catalog) + 1;
   }
 
   addCatalog(name: string): void {

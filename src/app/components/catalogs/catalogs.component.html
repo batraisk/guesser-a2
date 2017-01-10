@@ -31,41 +31,85 @@
 
           <a href="javascript: void(0)"
              (click)="addCatalog(nameCatalog.value);
-             nameCatalog.value=''">
+             nameCatalog.value=''"
+             [class.hide]="nameCatalog.value == ''">
              <md-icon>add
               </md-icon>
           </a>
+    </div>
+    <div class="catalogs-list">
+      <ul>
+        <li *ngFor="let catalog of catalogs"
+            (click)="setCatalog(catalog)"
+            [class.selected]="catalog == catalogs[selectIndex-1]">
+          {{ catalog.name }}
+        </li>
+      </ul>
     </div>
   </div>
 
 <div class="wrapper">
   <div md-content class="md-padding">
-    <md-tab-group [selectedIndex]="0"
+    <md-tab-group [selectedIndex]="selectIndex"
+      (selectChange)="selectIndex = $event.index"
       class="tab-list"
       md-border-bottom>
       <md-tab label="select all">
+        <div *ngIf="loading" class="loading"> <div class="icon"></div></div>
         <div class="demo-tab tab{{$index%4}}"
              style="padding: 25px;
                     text-align: center;">
+
+          <div *ngFor="let catalog of catalogs">
+              <div *ngFor="let word of catalog.list" class="row">
+                <div class="col-xs-4 col-md-2">
+                  <span>{{ word.un }}</span>
+                </div>
+                <div class="col-xs-4 col-md-2">
+                  <span>{{ word.ru }}</span>
+                </div>
+                <div class="col-xs-4 col-md-2">
+                  <label class="action-icon"
+                         for="modal-1"
+                         (click)="wordEditForm(word)">
+                           <md-icon>edit
+                           </md-icon>
+                  </label>
+                  <label class="action-icon"
+                     (click)="deleteWord(word);"
+                     *ngIf="catalog && (catalog.id !== -1)">
+                       <md-icon>delete
+                       </md-icon>
+                  </label>
+                </div>
+              </div>
+            </div>
+
           <!-- <div class="content-list"> -->
-            <ul *ngFor="let catalog of catalogs">
-              <li *ngFor="let word of catalog.list">
-                <span>{{ word.un }}</span>
-                <span>{{ word.ru }}</span>
-                <label class="action-icon"
-                       for="modal-1"
-                       (click)="wordEditForm(word)">
-                         <md-icon>edit
-                         </md-icon>
-                </label>
-                <label class="action-icon"
-                   (click)="deleteWord(word);"
-                   *ngIf="catalog && (catalog.id !== -1)">
-                     <md-icon>delete
-                     </md-icon>
-                </label>
-              </li>
-            </ul>
+            <div *ngFor="let catalog of catalogs">
+              <div *ngFor="let word of catalog.list" class="row">
+                <div class="col-xs-4 col-md-2">
+                  <span>{{ word.un }}</span>
+                </div>
+                <div class="col-xs-4 col-md-2">
+                  <span>{{ word.ru }}</span>
+                </div>
+                <div class="col-xs-4 col-md-2">
+                  <label class="action-icon"
+                         for="modal-1"
+                         (click)="wordEditForm(word)">
+                           <md-icon>edit
+                           </md-icon>
+                  </label>
+                  <label class="action-icon"
+                     (click)="deleteWord(word);"
+                     *ngIf="catalog && (catalog.id !== -1)">
+                       <md-icon>delete
+                       </md-icon>
+                  </label>
+                </div>
+              </div>
+            </div>
           <!-- </div> -->
           <br/>
           <button md-button class="md-primary md-raised" >Remove Tab</button>
@@ -93,17 +137,28 @@
                    >addWord</a>
               </div>
             <div>
-                <li *ngFor="let word of catalog.list">
+              <div *ngFor="let word of catalog.list" class="row">
+                <div class="col-xs-4 col-md-2">
                   <span>{{ word.un }}</span>
+                </div>
+                <div class="col-xs-4 col-md-2">
                   <span>{{ word.ru }}</span>
-                  <label class="btn"
+                </div>
+                <div class="col-xs-4 col-md-2">
+                  <label class="action-icon"
                          for="modal-1"
-                         (click)="wordEditForm(word)">Edit
+                         (click)="wordEditForm(word)">
+                           <md-icon>edit
+                           </md-icon>
                   </label>
-                  <a href="javascript: void(0)"
+                  <label class="action-icon"
                      (click)="deleteWord(word);"
-                     *ngIf="catalog && (catalog.id !== -1)">DeleteWord</a>
-                </li>
+                     *ngIf="catalog && (catalog.id !== -1)">
+                       <md-icon>delete
+                       </md-icon>
+                  </label>
+                </div>
+              </div>
             </div>
             <br/>
             <button md-button class="md-primary md-raised" >Remove Tab</button>
