@@ -7,6 +7,9 @@ import { ICatalog } from '../../models/interfaces/icatalog';
 import { Catalog } from '../../models/classes/catalog';
 import { Word } from '../../models/classes/word';
 import * as _ from "lodash";
+import { ModalDialog } from '../../models/classes/modalDialog';
+import { MdDialogRef } from '@angular/material';
+import { MdDialog } from '@angular/material';
 
 @Component({
   selector: 'app-catalogs',
@@ -23,11 +26,24 @@ private enableCatalog: Catalog; // каталог который выбрали 
 public editWord;
 private loading: Boolean;
 public selectIndex: number = 0;
+dialogRef: MdDialogRef<ModalDialog>;
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private catalogService: CatalogsService) {
+    private catalogService: CatalogsService,
+    public dialog: MdDialog) {
+  }
+
+  openDialog() {
+    this.dialogRef = this.dialog.open(ModalDialog, {
+      disableClose: false
+    });
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      console.log('result: ' + result);
+      this.dialogRef = null;
+    });
   }
 
   ngOnInit() {

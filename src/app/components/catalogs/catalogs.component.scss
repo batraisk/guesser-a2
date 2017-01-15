@@ -5,6 +5,17 @@
   cursor: pointer;
 }
 
+.row {
+  -webkit-transition-duration: .2s;
+  transition-duration: .2s;
+
+  &:hover{
+    -webkit-transition-duration: .2s;
+    background: #E8ECFF;
+    transition-duration: .2s;
+  }
+}
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -102,20 +113,20 @@ button {
 
 
     -webkit-animation-name: spin;
-    -webkit-animation-duration: 1200ms;
+    -webkit-animation-duration: 1800ms;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
     -moz-animation-name: spin;
-    -moz-animation-duration: 1200ms;
+    -moz-animation-duration: 1800ms;
     -moz-animation-iteration-count: infinite;
     -moz-animation-timing-function: linear;
     -ms-animation-name: spin;
-    -ms-animation-duration: 1200ms;
+    -ms-animation-duration: 1800ms;
     -ms-animation-iteration-count: infinite;
     -ms-animation-timing-function: linear;
 
     animation-name: spin;
-    animation-duration: 1200ms;
+    animation-duration: 1800ms;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
   }

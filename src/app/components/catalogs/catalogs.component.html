@@ -18,6 +18,7 @@
   <div class="user-set">
     <button md-button><md-icon>home</md-icon>
     </button>
+<button type="button" (click)="openDialog()">Open dialog</button>
   </div>
 </header>
 
@@ -148,7 +149,7 @@
                   <label class="action-icon"
                          for="modal-1"
                          (click)="wordEditForm(word)">
-                           <md-icon>edit
+                           <md-icon for="modal-1">edit
                            </md-icon>
                   </label>
                   <label class="action-icon"
@@ -174,7 +175,7 @@
 
 
 <!-- Модальное окно -->
-<div class="modal">
+<div class="modal" id="modal-1">
   <input class="modal-open" id="modal-1" type="checkbox" hidden>
   <div class="modal-wrap" aria-hidden="true" role="dialog">
     <label class="modal-overlay" for="modal-1"></label>

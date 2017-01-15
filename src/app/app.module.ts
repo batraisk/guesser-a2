@@ -13,6 +13,7 @@ import { AppRoutingModule }     from './app-routing.module';
 import { HelloComponent } from './components/hello/hello.component';
 import { Word } from './models/classes/word';
 import { Catalog } from './models/classes/catalog';
+import { ModalDialog } from './models/classes/modalDialog';
 import { ICatalog } from './models/interfaces/icatalog';
 import { ITask } from './models/interfaces/itask';
 import * as _ from "lodash";
@@ -25,7 +26,8 @@ import { MaterialModule } from '@angular/material';
     AppComponent,
     CatalogsComponent,
     HelloComponent,
-    GameComponent
+    GameComponent,
+    ModalDialog
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,7 @@ import { MaterialModule } from '@angular/material';
     AppRoutingModule,
     [MaterialModule.forRoot()]
   ],
+  entryComponents: [ModalDialog],
   providers: [CatalogsService, SettingsService, GameService],
   bootstrap: [AppComponent]
 })
