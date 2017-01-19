@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import 'rxjs/add/operator/switchMap';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { CatalogsService } from '../../services/catalogs/catalogs.service';
+import { DialogsService } from '../../services/dialogs/dialogs.service';
 import { ICatalog } from '../../models/interfaces/icatalog';
 import { Catalog } from '../../models/classes/catalog';
 import { Word } from '../../models/classes/word';
 import * as _ from "lodash";
-import { ModalDialog } from '../../models/classes/modalDialog';
+import { ModalDialog } from '../dialogs/modalDialog.component';
 import { MdDialogRef } from '@angular/material';
 import { MdDialog } from '@angular/material';
 
@@ -27,23 +28,39 @@ public editWord;
 private loading: Boolean;
 public selectIndex: number = 0;
 dialogRef: MdDialogRef<ModalDialog>;
+result: any
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     private catalogService: CatalogsService,
-    public dialog: MdDialog) {
+    public dialog: MdDialog,
+    private dialogsService: DialogsService,
+    private viewContainerRef: ViewContainerRef) {
   }
 
-  openDialog() {
-    this.dialogRef = this.dialog.open(ModalDialog, {
-      disableClose: false
-    });
+  openDialog(word: Word) {
+    // this.dialogRef = this.dialog.open(ModalDialog, {
+    //   disableClose: false
+    // });
 
-    this.dialogRef.afterClosed().subscribe(result => {
-      console.log('result: ' + result);
-      this.dialogRef = null;
-    });
+    // this.dialogRef.afterClosed().subscribe(result => {
+    //   console.log('result: ' + result);
+    //   this.dialogRef = null;
+    // });
+    var clone = new Word;
+    this.editWord = null;
+    this.editCatalog = null;
+    for (var key in word) {
+      clone[key] = word[key];
+    }
+    this.editWord = clone;
+    this.dialogsService
+      .confirm(this.editWord, this.viewContainerRef)
+      .subscribe(res => {this.result = res;
+                         console.log(res);
+                         if (res) {
+                         this.updateWord(this.result as Word)}});
   }
 
   ngOnInit() {

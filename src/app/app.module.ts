@@ -8,12 +8,13 @@ import { CatalogsComponent } from './components/catalogs/catalogs.component';
 import { CatalogsService } from './services/catalogs/catalogs.service';
 import { GameService } from './services/game/game.service';
 import { SettingsService } from './services/settings/settings.service';
+import { DialogsService } from './services/dialogs/dialogs.service';
 
 import { AppRoutingModule }     from './app-routing.module';
 import { HelloComponent } from './components/hello/hello.component';
 import { Word } from './models/classes/word';
 import { Catalog } from './models/classes/catalog';
-import { ModalDialog } from './models/classes/modalDialog';
+import { ModalDialog } from './components/dialogs/modalDialog.component';
 import { ICatalog } from './models/interfaces/icatalog';
 import { ITask } from './models/interfaces/itask';
 import * as _ from "lodash";
@@ -37,7 +38,7 @@ import { MaterialModule } from '@angular/material';
     [MaterialModule.forRoot()]
   ],
   entryComponents: [ModalDialog],
-  providers: [CatalogsService, SettingsService, GameService],
+  providers: [CatalogsService, SettingsService, GameService, DialogsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
