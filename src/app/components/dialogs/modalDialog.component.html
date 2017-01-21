@@ -1,0 +1,28 @@
+<div *ngIf="word">
+  <md-input-container>
+    <input type="text" [(ngModel)]="word.un"
+           md-input placeholder="En">
+  </md-input-container>
+  <md-input-container>
+    <input type="text" [(ngModel)]="word.ru"
+           md-input placeholder="Ru">
+  </md-input-container>
+
+  <md-dialog-actions>
+    <button md-button (click)="dialogRef.close(this.word)">Save</button>
+    <button md-button md-dialog-close>Cancel</button>
+  </md-dialog-actions>
+</div>
+
+<div *ngIf="catalog">
+  <md-input-container>
+    <input type="text" [(ngModel)]="catalog.name"
+           md-input placeholder="Имя каталога">
+  </md-input-container>
+
+
+  <md-dialog-actions>
+    <button md-button (click)="dialogRef.close(this.catalog)">Save</button>
+    <button md-button md-dialog-close>Cancel</button>
+  </md-dialog-actions>
+</div>

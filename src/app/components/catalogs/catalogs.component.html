@@ -18,7 +18,6 @@
   <div class="user-set">
     <button md-button><md-icon>home</md-icon>
     </button>
-<button type="button" (click)="openDialog()">Open dialog</button>
   </div>
 </header>
 
@@ -34,13 +33,14 @@
              (click)="addCatalog(nameCatalog.value);
              nameCatalog.value=''"
              [class.hide]="nameCatalog.value == ''">
-             <md-icon>add
+             <md-icon>note_add
               </md-icon>
           </a>
     </div>
     <div class="catalogs-list">
       <ul>
         <li *ngFor="let catalog of catalogs"
+            class="word-cell"
             (click)="setCatalog(catalog)"
             [class.selected]="catalog == catalogs[selectIndex-1]">
           {{ catalog.name }}
@@ -62,14 +62,14 @@
                     text-align: center;">
 
           <div *ngFor="let catalog of catalogs">
-              <div *ngFor="let word of catalog.list" class="row">
-                <div class="col-xs-4 col-md-2">
+              <div *ngFor="let word of catalog.list" class="word-row row">
+                <div class="col-xs-4">
                   <span>{{ word.un }}</span>
                 </div>
-                <div class="col-xs-4 col-md-2">
+                <div class="col-xs-4 word-cell">
                   <span>{{ word.ru }}</span>
                 </div>
-                <div class="col-xs-4 col-md-2">
+                <div class="col-xs-4 word-cell">
                   <label class="action-icon"
                          for="modal-1"
                          (click)="openDialog(word)">
@@ -85,35 +85,7 @@
                 </div>
               </div>
             </div>
-
-          <!-- <div class="content-list"> -->
-            <div *ngFor="let catalog of catalogs">
-              <div *ngFor="let word of catalog.list" class="row">
-                <div class="col-xs-4 col-md-2">
-                  <span>{{ word.un }}</span>
-                </div>
-                <div class="col-xs-4 col-md-2">
-                  <span>{{ word.ru }}</span>
-                </div>
-                <div class="col-xs-4 col-md-2">
-                  <label class="action-icon"
-                         for="modal-1"
-                         (click)="openDialog(word)">
-                           <md-icon>edit
-                           </md-icon>
-                  </label>
-                  <label class="action-icon"
-                     (click)="deleteWord(word);"
-                     *ngIf="catalog && (catalog.id !== -1)">
-                       <md-icon>delete
-                       </md-icon>
-                  </label>
-                </div>
-              </div>
-            </div>
-          <!-- </div> -->
           <br/>
-          <button md-button class="md-primary md-raised" >Remove Tab</button>
         </div>
       </md-tab>
 
@@ -121,31 +93,47 @@
 
       <md-tab *ngFor="let catalog of catalogs"
               label="{{catalog.name}}">
-          <a href="javascript: void(0)" (click)="deleteCatalog(catalog)">delete</a>
-          <label class="btn"
-                 for="modal-1"
-                 (click)="catalogEditForm(catalog)">Edit
-          </label>
+          <button md-button
+                  (click)="deleteCatalog(catalog)">delete
+          </button>
+          <button md-button
+                 (click)="openCatalogDialog(catalog)">
+                 <md-icon>description</md-icon>
+          </button>
           <div class="demo-tab tab{{$index%4}}" style="padding: 25px; text-align: center;">
-              <div class="create-word-group"
-                   *ngIf="catalog && (catalog.id !== -1)">
-                <input type="text" #wordEn>
-                <input type="text" #wordRu>
-                <a href="javascript: void(0)"
-                   (click)="addWord(wordEn.value,wordRu.value,catalog.id);
-                   wordEn.value='';
-                   wordRu.value=''"
-                   >addWord</a>
-              </div>
+            <div class="create-word-group row"
+                 *ngIf="catalog && (catalog.id !== -1)">
+              <md-input-container class="col-xs-4 word-cell">
+                <input md-input
+                       type="text"
+                       #wordEn
+                       placeholder="En">
+              </md-input-container>
+              <md-input-container class="col-xs-4 word-cell">
+                <input md-input
+                       type="text"
+                       #wordRu
+                       placeholder="Ru">
+              </md-input-container>
+              <button md-mini-fab color="primary"
+                      class="col-xs-4 word-cell"
+                      style="margin-left: 15px;"
+                      (click)="addWord(wordEn.value,wordRu.value,catalog.id);
+                      wordEn.value='';
+                      wordRu.value=''">
+                 <md-icon>add
+                 </md-icon>
+              </button>
+            </div>
             <div>
-              <div *ngFor="let word of catalog.list" class="row">
-                <div class="col-xs-4 col-md-2">
+              <div *ngFor="let word of catalog.list" class="word-row row">
+                <div class="col-xs-4 word-cell">
                   <span>{{ word.un }}</span>
                 </div>
-                <div class="col-xs-4 col-md-2">
+                <div class="col-xs-4 word-cell">
                   <span>{{ word.ru }}</span>
                 </div>
-                <div class="col-xs-4 col-md-2">
+                <div class="col-xs-4">
                   <label class="action-icon"
                          for="modal-1"
                          (click)="openDialog(word)">
@@ -162,7 +150,6 @@
               </div>
             </div>
             <br/>
-            <button md-button class="md-primary md-raised" >Remove Tab</button>
           </div>
       </md-tab>
     </md-tab-group>

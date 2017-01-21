@@ -3,6 +3,7 @@ import { ModalDialog } from '../../components/dialogs/modalDialog.component';
 import { MdDialogRef, MdDialog, MdDialogConfig } from '@angular/material';
 import { Injectable, ViewContainerRef } from '@angular/core';
 import { Word } from '../../models/classes/word'
+import { Catalog } from '../../models/classes/catalog'
 
 
 @Injectable()
@@ -33,6 +34,19 @@ export class DialogsService {
         dialogRef = this.dialog.open(ModalDialog, config);
 
         dialogRef.componentInstance.word = word;
+
+        return dialogRef.afterClosed();
+    }
+
+    public confirmCatalog(catalog: Catalog, viewContainerRef: ViewContainerRef): Observable<boolean> {
+
+        let dialogRef: MdDialogRef<ModalDialog>;
+        let config = new MdDialogConfig();
+        config.viewContainerRef = viewContainerRef;
+
+        dialogRef = this.dialog.open(ModalDialog, config);
+
+        dialogRef.componentInstance.catalog = catalog;
 
         return dialogRef.afterClosed();
     }

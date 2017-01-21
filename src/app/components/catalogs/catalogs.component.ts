@@ -40,14 +40,6 @@ result: any
   }
 
   openDialog(word: Word) {
-    // this.dialogRef = this.dialog.open(ModalDialog, {
-    //   disableClose: false
-    // });
-
-    // this.dialogRef.afterClosed().subscribe(result => {
-    //   console.log('result: ' + result);
-    //   this.dialogRef = null;
-    // });
     var clone = new Word;
     this.editWord = null;
     this.editCatalog = null;
@@ -62,6 +54,22 @@ result: any
                          if (res) {
                          this.updateWord(this.result as Word)}});
   }
+
+openCatalogDialog(catalog: Catalog) {
+  var clone = new Catalog;
+  this.editWord = null;
+  this.editCatalog = null;
+  for (var key in catalog) {
+    clone[key] = catalog[key];
+  }
+  this.editCatalog = clone;
+  this.dialogsService
+    .confirmCatalog(this.editCatalog, this.viewContainerRef)
+    .subscribe(res => {this.result = res;
+                       console.log(res);
+                       if (res) {
+                       this.updateCatalog(catalog, this.result as Catalog)}});
+}
 
   ngOnInit() {
     if(!this.catalogs) {
