@@ -1,0 +1,27 @@
+header {
+  background: #0003FF;
+  height: 40px;
+  position: fixed;
+  min-width: 100%;
+  z-index: 3;
+}
+
+h3 {
+      margin: -24px -24px 30px;
+    display: block;
+    background: #2600DC;
+    color: #fff;
+    padding: 13px 50px;
+}
+
+.action-icon {
+  -webkit-transition-duration: .5s;
+  cursor: pointer;
+
+  transition-duration: .5s;
+  color: #a5a5a5;
+
+  &:hover {
+    color: #0703F7;
+  }
+}

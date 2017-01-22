@@ -27,6 +27,7 @@ private enableCatalog: Catalog; // каталог который выбрали 
 public editWord;
 private loading: Boolean;
 public selectIndex: number = 0;
+public sidebarEnable: boolean = true;
 dialogRef: MdDialogRef<ModalDialog>;
 result: any
 
@@ -55,21 +56,21 @@ result: any
                          this.updateWord(this.result as Word)}});
   }
 
-openCatalogDialog(catalog: Catalog) {
-  var clone = new Catalog;
-  this.editWord = null;
-  this.editCatalog = null;
-  for (var key in catalog) {
-    clone[key] = catalog[key];
+  openCatalogDialog(catalog: Catalog) {
+    var clone = new Catalog;
+    this.editWord = null;
+    this.editCatalog = null;
+    for (var key in catalog) {
+      clone[key] = catalog[key];
+    }
+    this.editCatalog = clone;
+    this.dialogsService
+      .confirmCatalog(this.editCatalog, this.viewContainerRef)
+      .subscribe(res => {this.result = res;
+                         console.log(res);
+                         if (res) {
+                         this.updateCatalog(catalog, this.result as Catalog)}});
   }
-  this.editCatalog = clone;
-  this.dialogsService
-    .confirmCatalog(this.editCatalog, this.viewContainerRef)
-    .subscribe(res => {this.result = res;
-                       console.log(res);
-                       if (res) {
-                       this.updateCatalog(catalog, this.result as Catalog)}});
-}
 
   ngOnInit() {
     if(!this.catalogs) {
@@ -84,8 +85,12 @@ openCatalogDialog(catalog: Catalog) {
     // this.catalogs = this.catalogService.getCatalogs();
   }
 
-  show(event){
+  show(event) {
     console.log(event);
+  }
+
+  showSidebar(event) {
+    this.sidebarEnable = !this.sidebarEnable
   }
 
   setCatalog(catalog: ICatalog, event = null): void {

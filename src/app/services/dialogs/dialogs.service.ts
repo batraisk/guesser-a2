@@ -43,10 +43,12 @@ export class DialogsService {
         let dialogRef: MdDialogRef<ModalDialog>;
         let config = new MdDialogConfig();
         config.viewContainerRef = viewContainerRef;
+        config.height = '220px';
 
         dialogRef = this.dialog.open(ModalDialog, config);
 
         dialogRef.componentInstance.catalog = catalog;
+        dialogRef.componentInstance.countWord = catalog.list.length;
 
         return dialogRef.afterClosed();
     }

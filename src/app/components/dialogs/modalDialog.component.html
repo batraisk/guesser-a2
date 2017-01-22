@@ -1,4 +1,8 @@
+
 <div *ngIf="word">
+
+    <h3 md-dialog-title>Редактировать слово</h3>
+
   <md-input-container>
     <input type="text" [(ngModel)]="word.un"
            md-input placeholder="En">
@@ -9,20 +13,33 @@
   </md-input-container>
 
   <md-dialog-actions>
-    <button md-button (click)="dialogRef.close(this.word)">Save</button>
-    <button md-button md-dialog-close>Cancel</button>
+    <button md-button (click)="dialogRef.close(this.word)">Сохранить</button>
+    <button md-button md-dialog-close>Отмена</button>
   </md-dialog-actions>
 </div>
 
 <div *ngIf="catalog">
+
+  <h3 md-dialog-title>Редактировать католог</h3>
+
   <md-input-container>
     <input type="text" [(ngModel)]="catalog.name"
            md-input placeholder="Имя каталога">
-  </md-input-container>
+    </md-input-container>
+    <label class="action-icon"
+           (click)="deleteCatalog(catalog);
+                    dialogRef.close();"
+           style="float: right;">
+      <md-icon>delete
+      </md-icon>
+    </label>
+    <br>
+    <span style="margin-top: 5px;">Слов в каталоге:</span>
+    <strong> {{ countWord }}</strong>
 
 
-  <md-dialog-actions>
-    <button md-button (click)="dialogRef.close(this.catalog)">Save</button>
-    <button md-button md-dialog-close>Cancel</button>
+  <md-dialog-actions style="margin-top: 10px;">
+    <button md-button (click)="dialogRef.close(this.catalog)">Сохранить</button>
+    <button md-button md-dialog-close>Отмена</button>
   </md-dialog-actions>
 </div>

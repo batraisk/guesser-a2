@@ -7,37 +7,48 @@
               </md-icon>
             <!-- <i class="material-icons">keyboard_arrow_left</i> -->
     </button>
+    <button class="menu-btn"
+            md-button
+            (click)="showSidebar($event)">
+              <md-icon>more_vert
+              </md-icon>
+            <!-- <i class="material-icons">keyboard_arrow_left</i> -->
+    </button>
     <button class="start-btn"
             md-button
             routerLink="/game"
             routerLinkActive="active">
-              <md-icon>play_circle_outline
-              </md-icon> <strong> Start</strong>
+              <md-icon>play_circle_outline</md-icon>
+              <strong> Go</strong>
     </button>
   </div>
   <div class="user-set">
-    <button md-button><md-icon>home</md-icon>
+    <button md-button>
+      <md-icon>home</md-icon>
     </button>
   </div>
 </header>
 
 
-  <div class ="sidenav">
+  <div class ="sidenav"
+
+       [ngClass]="{showleft: sidebarEnable}">
     <div class="new-catalog-side">
       <md-input-container>
-        <input type="text" #nameCatalog
+        <input type="text"
+               #nameCatalog
                md-input placeholder="Новый каталог">
       </md-input-container>
-
-          <a href="javascript: void(0)"
-             (click)="addCatalog(nameCatalog.value);
-             nameCatalog.value=''"
-             [class.hide]="nameCatalog.value == ''">
-             <md-icon>note_add
-              </md-icon>
-          </a>
+        <a href="javascript: void(0)"
+           (click)="addCatalog(nameCatalog.value);
+           nameCatalog.value=''"
+           [class.hide]="nameCatalog.value == ''">
+           <md-icon>note_add
+            </md-icon>
+        </a>
     </div>
-    <div class="catalogs-list">
+    <div class="catalogs-list"
+         *ngIf="sidebarEnable">
       <ul>
         <li *ngFor="let catalog of catalogs"
             class="word-cell"
@@ -94,11 +105,10 @@
       <md-tab *ngFor="let catalog of catalogs"
               label="{{catalog.name}}">
           <button md-button
-                  (click)="deleteCatalog(catalog)">delete
-          </button>
-          <button md-button
+                 class="action-icon"
                  (click)="openCatalogDialog(catalog)">
                  <md-icon>description</md-icon>
+                 <span> Редактировать список</span>
           </button>
           <div class="demo-tab tab{{$index%4}}" style="padding: 25px; text-align: center;">
             <div class="create-word-group row"
