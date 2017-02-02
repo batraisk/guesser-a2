@@ -1,3 +1,20 @@
+$general-color: #0003FF;
+
+body {
+  background: #cecece;
+}
+
+.catalog-header {
+  background: #0003FF;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+}
+
+md-tab-header {
+  display: none !important;
+}
+
 .selected {
   color: #0003FF;
 }
@@ -31,6 +48,7 @@ li {
   //top: 40px;
   margin-left: 240px;
   position: relative;
+  background: #fff;
 }
 
 .catalogs-list {
@@ -41,7 +59,7 @@ li {
 
 header {
   //background: #cecece;
-  background: #0003FF;
+  background: $general-color;
   height: 40px;
   position: fixed;
   min-width: 100%;
@@ -71,6 +89,7 @@ header {
 }
 
 .user-set {
+  font-size: 24px;
   display: inline-flex;
   float: right;
 }
@@ -181,6 +200,7 @@ header {
 .wrapper {
   top: 40px;
   position: relative;
+  margin: 15px;
 }
 
 .row {
@@ -333,6 +353,7 @@ label {
 
   .tab-list {
     margin-left: 5px;
+    background: #fff;
   }
 
   .create-word-group {

@@ -1,18 +1,16 @@
-<header>
+<!-- <header>
   <div class="navigation">
     <button class="back-btn"
             md-button
             (click)="goBack($event)">
               <md-icon>arrow_back
               </md-icon>
-            <!-- <i class="material-icons">keyboard_arrow_left</i> -->
     </button>
     <button class="menu-btn"
             md-button
             (click)="showSidebar($event)">
               <md-icon>more_vert
               </md-icon>
-            <!-- <i class="material-icons">keyboard_arrow_left</i> -->
     </button>
     <button class="start-btn"
             md-button
@@ -27,7 +25,8 @@
       <md-icon>home</md-icon>
     </button>
   </div>
-</header>
+</header> -->
+<app-header></app-header>
 
 
   <div class ="sidenav"
@@ -104,6 +103,9 @@
 
       <md-tab *ngFor="let catalog of catalogs"
               label="{{catalog.name}}">
+          <div class="catalog-header">
+            <h3><strong>{{ catalog.name }}</strong></h3>
+          </div>
           <button md-button
                  class="action-icon"
                  (click)="openCatalogDialog(catalog)">

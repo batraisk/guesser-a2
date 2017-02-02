@@ -12,6 +12,7 @@ import { DialogsService } from './services/dialogs/dialogs.service';
 
 import { AppRoutingModule }     from './app-routing.module';
 import { HelloComponent } from './components/hello/hello.component';
+import { HeaderComponent } from './components/header/header.component';
 import { Word } from './models/classes/word';
 import { Catalog } from './models/classes/catalog';
 import { ModalDialog } from './components/dialogs/modalDialog.component';
@@ -28,7 +29,8 @@ import { MaterialModule } from '@angular/material';
     CatalogsComponent,
     HelloComponent,
     GameComponent,
-    ModalDialog
+    ModalDialog,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

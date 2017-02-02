@@ -1,8 +1,14 @@
 .selected {
   background: #efefef;
 }
+
 .catalog-name, .ques-word {
   cursor: pointer;
+}
+
+.wrapper {
+  top: 40px;
+  position: relative;
 }
 
 

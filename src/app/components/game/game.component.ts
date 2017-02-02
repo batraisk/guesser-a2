@@ -9,6 +9,7 @@ import { Catalog } from '../../models/classes/catalog';
 import { Word } from '../../models/classes/word';
 import { ICatalog } from '../../models/interfaces/icatalog';
 import { ITask } from '../../models/interfaces/itask';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-game',
@@ -20,6 +21,7 @@ export class GameComponent implements OnInit {
   private activeCatalog: ICatalog;
   private activeCatalogs: ICatalog[] = [];
   private task: ITask;
+
 
   constructor(
     private route: ActivatedRoute,
