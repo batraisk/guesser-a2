@@ -21,7 +21,12 @@ import { ITask } from './models/interfaces/itask';
 import * as _ from "lodash";
 import 'hammerjs';
 import { GameComponent } from './components/game/game.component';
+import { userAuthComponent } from './components/userAuth/userAuth.component';
 import { MaterialModule } from '@angular/material';
+import { Angular2TokenService } from './services/token.service';
+import { A2tUiModule } from 'angular2-token';
+
+// import { Angular2TokenService, A2tUiModule } from 'angular2-token';
 
 @NgModule({
   declarations: [
@@ -30,17 +35,23 @@ import { MaterialModule } from '@angular/material';
     HelloComponent,
     GameComponent,
     ModalDialog,
-    HeaderComponent
+    HeaderComponent,
+    userAuthComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    A2tUiModule,
     AppRoutingModule,
     [MaterialModule.forRoot()]
   ],
   entryComponents: [ModalDialog],
-  providers: [CatalogsService, SettingsService, GameService, DialogsService],
+  providers: [CatalogsService,
+              SettingsService,
+              GameService,
+              Angular2TokenService,
+              DialogsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

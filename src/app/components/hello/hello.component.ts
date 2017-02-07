@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalogsService } from '../../services/catalogs/catalogs.service';
+import { Angular2TokenService } from '../../services/token.service';
+// import { Angular2TokenService } from 'angular2-token';
 
 @Component({
   selector: 'app-hello',
@@ -8,11 +10,52 @@ import { CatalogsService } from '../../services/catalogs/catalogs.service';
 })
 export class HelloComponent implements OnInit {
 
-  constructor(private catalogService: CatalogsService) {
+  constructor(private catalogService: CatalogsService,
+              private _tokenService: Angular2TokenService) {
     // this.catalogService
     //       .downloadCatalogs()
     //       .then(catalogs => {})
+    // this._tokenService.init(
+    //   {
+    //    globalOptions: {
+    //         headers: {
+    //             'Content-Type':     'application/json',
+    //             'Accept':           'application/json'
+    //         }
+    //     }});
+    }
+  userSignedIn() {
+    console.log(this._tokenService.userSignedIn())
   }
+
+  register() {
+    this._tokenService.registerAccount({
+      email:                'example8@example.org',
+      password:             'secretPassword',
+      passwordConfirmation: 'secretPassword'
+    }).subscribe(
+      res =>      console.log(res),
+      error =>    console.log(error)
+    );
+  }
+
+  singin() {
+    this._tokenService.signIn({
+      email:    'example@example.org',
+      password: 'secretPassword'
+    }).subscribe(
+      res =>      console.log(res),
+      error =>    console.log(error)
+    );
+  }
+
+  validate() {
+    this._tokenService.validateToken().subscribe(
+      res =>      console.log(res),
+      error =>    console.log(error)
+    );
+  }
+
 
   ngOnInit() {
 

@@ -18,10 +18,29 @@ export class CatalogsService {
         .toPromise()
         .then(response => {this.catalogs = response.json() as ICatalog[]})
         .catch(this.handleError);
+    //     this.validateToken();
+
+    // this.http
+    //            .post('/auth',
+    //                  JSON.stringify({email: 'example@example.org',
+    //                                  password: 'secretPassword',
+    //                                  passwordConfirmation: 'secretPassword',
+    //                                  confirm_success_url: 'www.fef.ru'}),
+    //                  {headers: this.headers})
+    //            .toPromise()
+    //            .then(response => {console.log(response)})
+    //            .catch(this.handleError);
   }
 
   getCatalogs(): ICatalog[] {
     return this.catalogs;
+  }
+
+  validateToken(): Promise<string> {
+    return this.http.get('/auth/validate_token')
+      .toPromise()
+        .then(response => {console.log(response)})
+        .catch(this.handleError);
   }
 
   downloadCatalogs(): Promise<ICatalog[]> {
