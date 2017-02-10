@@ -1,23 +1,71 @@
 <div class="wrapper">
-  <div class="auth-box">
-    <div class="input-box">
-      <md-input-container class="input">
-        <input type="text"
-               #userEmail
-               md-input placeholder="Email">
-      </md-input-container>
-      <br>
-      <md-input-container class="input">
-        <input type="text"
-               #userPassword
-               md-input placeholder="Password">
-      </md-input-container>
-    </div>
-    <button md-button (click)="singin(userEmail.value, userPassword.value)">
-      <md-icon>enter</md-icon>Вход
-    </button>
-    <button md-button (click)="register(userEmail.value, userPassword.value)">
-      <md-icon>enter</md-icon>register
-    </button>
+  <div class="back-block"></div>
+  <div class="auth-box"
+       [class.register]="_type=='register'">
+        <h1 *ngIf="_type=='enter'">Вход</h1>
+        <h1 *ngIf="_type=='register'">Новый пользователь</h1>
+
+
+<!--         <div class="input-types-box">
+
+
+        </div> -->
+        <div class="action-box">
+          <div class="input-box">
+            <md-input-container class="input">
+              <input type="text"
+                     #userEmail
+                     md-input placeholder="Email">
+            </md-input-container>
+            <br>
+            <md-input-container class="input">
+              <input type="text"
+                     #userPassword
+                     md-input placeholder="Password">
+            </md-input-container>
+            <md-input-container class="input"
+                                *ngIf="_type=='register'">
+              <input type="text"
+                     #userConfirmation
+                     md-input placeholder="Confirmation">
+            </md-input-container>
+          </div>
+          <div class="button-box">
+            <button md-button (click)="singIn(userEmail.value, userPassword.value)"
+                    *ngIf="_type=='enter'"
+                    class="input-btn">
+              <md-icon>input</md-icon> Вход
+            </button>
+            <button md-button (click)="register(userEmail.value, userPassword.value)"
+                    *ngIf="_type=='register'">
+              <md-icon>face</md-icon> Готово
+            </button>
+          </div>
+        </div>
+
+          <!-- <button md-button (click)="newUser()"
+                *ngIf="_type!='register'"
+                class="register-btn">
+            <md-icon>enter</md-icon>Регистрация
+          </button>
+          <button md-button (click)="enter()"
+                *ngIf="_type!='enter'"
+                class="enter-btn">
+            <md-icon>back</md-icon>Назад
+          </button> -->
+      <!-- <button md-button (click)="singOut()">
+        <md-icon>enter</md-icon>exit
+      </button> -->
+
+      <label  (click)="newUser()"
+              *ngIf="_type!='register'"
+              class="register-btn">
+          <md-icon>enter</md-icon>Регистрация
+        </label>
+        <label  (click)="enter()"
+              *ngIf="_type!='enter'"
+              class="enter-btn">
+          <md-icon>back</md-icon>Назад
+        </label>
   </div>
 </div>

@@ -32,8 +32,17 @@
     </button>
   </div>
   <div class="user-set">
+
     <button md-button>
       <md-icon>home</md-icon>
     </button>
+    <span *ngIf="user">{{ user.email }}</span>
+    <button md-button [mdMenuTriggerFor]="menu">Menu</button>
+    <md-menu #menu="mdMenu">
+      <span *ngIf="user">{{ user.email }}</span>
+      <button md-menu-item><small>Сменить пользователя</small></button>
+      <button md-menu-item>Выйти</button>
+    </md-menu>
+
   </div>
 </header>

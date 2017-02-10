@@ -10,11 +10,12 @@ export class AppComponent {
   constructor(private _tokenService: Angular2TokenService) {
     this._tokenService.init(
       {
-       globalOptions: {
-            headers: {
-                'Content-Type':     'application/json',
-                'Accept':           'application/json'
-            }
+        signInRedirect: 'userAuth',
+        globalOptions: {
+          headers: {
+              'Content-Type':     'application/json',
+              'Accept':           'application/json'
+          }
         }});
   }
   title = 'app works!';

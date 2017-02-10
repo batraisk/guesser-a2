@@ -5,25 +5,86 @@
   margin-top: 5%;
   width: 500px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
+  -webkit-transition-duration: .6s;
+  transition-duration: .6s;
+  padding: 10px;
+  border: solid 1px #00E7FF;
+  background: #fff;
+  z-index: 2;
+}
+
+.back-block {
+
+      background: #fff;
+    height: 200px;
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    background: #00E7FF;
 }
 
 .wrapper {
   border-radius: 5px;
   display: flex;
   height: 100%;
-  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
   width: 100%;
+  background: #fff;
 }
 
-.input {
+.input, .input-box{
   width: 300px;
 }
 
-.input-box {
-  margin: 10px 10px 0 10px;
-  //display: flex;
+// .input-box {
+//   width: 300px;
+// }
 
+.button-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .input-btn {
+    // height: 55px;
+    background: #00D0FF
+  }
 }
+
+.action-box {
+  display: flex;
+  justify-content: space-around;
+}
+
+.register {
+  background: rgb(204, 255, 0);
+}
+
+.input-types-box {
+  -webkit-transition-duration: .2s;
+  transition-duration: .2s;
+
+  .enter-btn {
+    float: right;
+    background: #385AFF;
+  }
+
+  .register-btn {
+    float: left;
+  }
+}
+
+label {
+  cursor: pointer;
+  -webkit-transition-duration: .2s;
+  transition-duration: .2s;
+  &:hover {
+    color: #00E7FF;
+  }
+}
+
+
 

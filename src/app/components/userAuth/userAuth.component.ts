@@ -9,6 +9,7 @@ import { Angular2TokenService } from '../../services/token.service';
   styleUrls: ['./userAuth.component.scss']
 })
 export class userAuthComponent implements OnInit {
+  private _type: string = 'enter';
   constructor(private route: ActivatedRoute,
               private _tokenService: Angular2TokenService
               // private _tokenService: Angular2TokenService
@@ -16,7 +17,8 @@ export class userAuthComponent implements OnInit {
   }
   ngOnInit() {}
 
-  singin(email: string, password: string) {
+
+  singIn(email: string, password: string) {
     this._tokenService.signIn({
       email:    email,
       password: password
@@ -24,6 +26,14 @@ export class userAuthComponent implements OnInit {
       res =>      console.log(res),
       error =>    console.log(error)
     );
+  }
+
+  newUser() {
+    this._type = 'register';
+  }
+
+  enter() {
+    this._type = 'enter';
   }
 
   register(email: string, password: string) {
@@ -35,6 +45,13 @@ export class userAuthComponent implements OnInit {
       res =>      console.log(res),
       error =>    console.log(error)
     );
+  }
+
+  singOut() {
+    this._tokenService.signOut().subscribe(
+    res =>      console.log(res),
+    error =>    console.log(error)
+  );
   }
 
 }

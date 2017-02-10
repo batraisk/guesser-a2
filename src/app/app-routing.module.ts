@@ -5,13 +5,30 @@ import { HelloComponent }   from './components/hello/hello.component';
 import { GameComponent }   from './components/game/game.component';
 import { userAuthComponent }   from './components/userAuth/userAuth.component';
 import { AppComponent }   from './app.component';
+import { Angular2TokenService } from './services/token.service';
 
 
 const routes: Routes = [
-  { path: 'catalogs',  component: CatalogsComponent },
-  { path: '',  component: HelloComponent },
-  { path: 'game',  component: GameComponent },
-  { path: 'userAuth',  component: userAuthComponent },
+  { path: 'catalogs',
+    component: CatalogsComponent,
+    canActivate: [Angular2TokenService] },
+
+  { path: '',
+    component: HelloComponent,
+    canActivate: [Angular2TokenService] },
+
+  { path: 'game',
+    component: GameComponent,
+    canActivate: [Angular2TokenService] },
+
+  { path: 'userAuth',
+    component: userAuthComponent },
+
+  {
+    path: 'restricted',
+    component: userAuthComponent,
+    canActivate: [Angular2TokenService]
+  }
 
 ];
 @NgModule({

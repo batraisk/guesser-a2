@@ -12,18 +12,7 @@ export class HelloComponent implements OnInit {
 
   constructor(private catalogService: CatalogsService,
               private _tokenService: Angular2TokenService) {
-    // this.catalogService
-    //       .downloadCatalogs()
-    //       .then(catalogs => {})
-    // this._tokenService.init(
-    //   {
-    //    globalOptions: {
-    //         headers: {
-    //             'Content-Type':     'application/json',
-    //             'Accept':           'application/json'
-    //         }
-    //     }});
-    }
+  }
   userSignedIn() {
     console.log(this._tokenService.userSignedIn())
   }
